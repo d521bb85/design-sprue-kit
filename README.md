@@ -2,7 +2,10 @@
 
 An AI agent skill that turns a model description and your printer model into a **3D-printable kit on a sprue** and a **step-by-step assembly guide**.
 
-![Four-stroke engine kit, assembled](examples/four-stroke-engine/assembled.png)
+<p>
+  <img src="examples/four-stroke-engine/printed-model.jpg" alt="Printed four-stroke engine kit, assembled" height="360">
+  <img src="examples/four-stroke-engine/printed-sprue.jpg" alt="Printed sprue with all parts of the kit" height="360">
+</p>
 
 The agent sets design rules for your printer, plans the parts and build order, and builds the model in code. It then assembles the kit itself to check that every step works, and only after that lays out the sprue and writes the guide.
 
@@ -29,7 +32,7 @@ The skill is one file in the open [Agent Skills](https://agentskills.io) format:
 
 ## Example
 
-[`examples/four-stroke-engine/`](examples/four-stroke-engine/) contains a single-cylinder engine kit for Bambu Lab P1S. It has the sprue STL, the assembly guide (in Russian), and an assembly animation.
+[`examples/four-stroke-engine/`](examples/four-stroke-engine/) contains a single-cylinder engine kit for Bambu Lab P1S. It has the sprue STL, the assembly guide (in Russian), an assembly animation, and photos of a test print.
 
 ## License
 
