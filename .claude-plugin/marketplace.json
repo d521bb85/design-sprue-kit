@@ -1,0 +1,14 @@
+{
+  "name": "design-sprue-kit",
+  "description": "Turn a model description and a printer model into a 3D-printable sprue kit with a retail-style assembly guide.",
+  "owner": {
+    "name": "Vladimir Ivanenko"
+  },
+  "plugins": [
+    {
+      "name": "design-sprue-kit",
+      "source": "./plugins/design-sprue-kit",
+      "description": "Design a 3D-printable model kit on a sprue plus a step-by-step assembly PDF, sized for your printer."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "design-sprue-kit",
+  "description": "Design a 3D-printable model kit on a sprue plus a step-by-step assembly PDF, sized for your printer.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Vladimir Ivanenko"
+  },
+  "license": "MIT",
+  "keywords": ["3d-printing", "sprue", "model-kit", "stl", "assembly-instructions"]
+}
