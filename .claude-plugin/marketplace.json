@@ -1,14 +1,16 @@
 {
   "name": "design-sprue-kit",
-  "description": "Turn a model description and a printer model into a 3D-printable sprue kit with a retail-style assembly guide.",
+  "description": "Design a 3D-printable model kit on a sprue (parts snap out of a frame) from a model description and a printer model, with a step-by-step assembly guide. Use when the user wants a printable kit, a snap-together model, or parts on a sprue.",
   "owner": {
-    "name": "Vladimir Ivanenko"
+    "name": "Vladimir Ivanenko",
+    "email": "hi@ivanen.co",
+    "url": "https://ivanen.co"
   },
   "plugins": [
     {
       "name": "design-sprue-kit",
       "source": "./plugins/design-sprue-kit",
-      "description": "Design a 3D-printable model kit on a sprue plus a step-by-step assembly PDF, sized for your printer."
+      "description": "Design a 3D-printable model kit on a sprue (parts snap out of a frame) from a model description and a printer model, with a step-by-step assembly guide. Use when the user wants a printable kit, a snap-together model, or parts on a sprue."
     }
   ]
 }

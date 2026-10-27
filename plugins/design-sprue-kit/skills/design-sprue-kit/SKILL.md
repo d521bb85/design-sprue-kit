@@ -1,57 +1,73 @@
 ---
 name: design-sprue-kit
-description: Design a 3D-printable model kit on a sprue (parts snap out of a frame) from a model description and a printer model, with a retail-style step-by-step assembly PDF.
+description: Design a 3D-printable model kit on a sprue (parts snap out of a frame) from a model description and a printer model, with a step-by-step assembly guide. Use when the user wants a printable kit, a snap-together model, or parts on a sprue.
+license: MIT
+compatibility: Needs code execution and file output. Web search helps for printer specs.
 ---
 
 # Design Sprue Kit
 
-Turn a description of any subject (machine, animal, building, vehicle, toy, mechanism) into a print-in-place sprue kit plus an assembly guide that reads like one from a bought kit.
+Turn a description of a subject and the user's printer into a kit that prints as one sprue and an assembly guide that leads from the sprue to the finished model.
 
-## Inputs
-- **Target model**: what it is, size or detail level, and whether it moves.
-- **Printer model**: required. If it is missing, ask for it. Look up the bed size, nozzle, and any **bed exclusion zones** (e.g. Bambu X1/P1 front-left ~18×28 mm), and confirm the specs with a web search if unsure. Default to a 0.4 nozzle and 0.2 layer unless told otherwise.
-- **Language**: write all on-part text, labels, and the guide in the user's language.
+A good kit is:
+- **True to the request**: it shows what the user asked for, and it works if the user asked for something that works.
+- **Interesting**: it has a clear idea, such as a mechanism you can see working, a cutaway, or a detail that rewards a closer look.
+- **Well thought out**: every part has a reason to exist, and every joint has one obvious way to fit.
+- **Easy to build**: each part comes off cleanly, goes in only one way, and stays in place while you work.
+- **Printable on this printer**: it fits the bed, needs no supports, and the fits work at this nozzle and material.
 
-## Design principles
-You have freedom in form and mechanism. Choose what makes the model look good and teach well. Keep these constraints:
+Work through the steps below in order. Go back to an earlier step whenever a later one shows a problem.
 
-- **Architecture**: a stack of flat plates (2.5D) on alignment pins works well for printed sprue kits. Other construction is fine if every part still prints flat with no supports.
-- **Make every dimension a multiple of the layer height.** Moving parts in a plate layer get 0.2 mm axial clearance on each side, e.g. a 2.6 mm part in a 3.0 mm layer.
-- **Fits** (starting values for 0.4 nozzle and FDM PLA): keyed press fit 0.15 mm; rotating fit 0.3 mm radial; sliding 0.25–0.4 mm. Minimum wall 1.6 mm (4 lines). Minimum feature 0.8 mm.
-- **Keyed shafts**: use D-profile shafts and pins so each part fits in only one orientation.
-- **Support every rotating assembly at both ends.** Use bearing holes in the outer walls, and make the journals part of the crank or lever. A part held only by a pin will wobble.
-- **Use blind holes so parts can't fall through during assembly.** The first plate in the stack gets blind holes; the last plate can have through holes. Pins sit in blind holes so they stay put.
-- **Ease of assembly vs. detail.** Merge parts where it costs no detail. Keep separate parts where they carry meaning, motion, or color.
-- **Visibility**: put text, engraving, and detail only on faces that remain visible once the model is built. Use windows, contrasting colors, labels, and indicators to explain how the model works.
-- **Clearance from everything static.** Check every moving part against everything that stays still: stands, raised text, handles, and bosses included.
+## 1. Understand the request
 
-## Verification
-Build the full 3D assembly and check it with code before you make the sprue:
-- Check every pair of parts for intersections across the full motion cycle, with fine angular steps.
-- Measure minimum gaps between parts in slices and flag any below the fit tolerances.
-- Confirm assembly order: each step's parts can enter along a free path, and nothing gets trapped.
-- Check that labels, part numbers, and printed text are legible at the printed size.
-Fix the design and re-run the checks until they pass, then go on to the sprue.
+Find out what the model is, what it should show or do, how big and detailed it should be, and who will build it. The printer model is required. Ask for it if it is missing, and ask about anything else only if the answer would change the design. Write all text on the parts and in the guide in the user's language.
 
-## Sprue
-- **Prefer one plate** that fits the bed, with a margin, outside the exclusion zones. Chamfer or rotate the frame to clear a zone, and confirm clearance with the convex hull.
-- **Gates**: about 0.8 × 0.6 mm, with a 0.4 mm-high neck at the part so it snaps off cleanly. Use more gates on large plates and one or two on small parts.
-- Number every part: raised number tags on the runners, and engraved numbers on large plates.
-- Nest small parts inside plate cutouts to save space, gated to the surrounding plate.
-- Export a single manifold STL and verify it is watertight and one body.
-- For prototype fixes, print the changed parts bare, without a sprue, to save plastic. Fold them into the sprue in the next revision.
+## 2. Learn the printer
 
-## Assembly guide (PDF)
-Make it look like a retail kit manual: clean, visual, no development notes.
-- **Cover**: a hero render, the model name, and a short spec line (size, part count, printer settings).
-- **Contents**: the sprue map with part numbers, and a parts list.
-- **Before you start**: how to remove parts, how fits work, and how to read the steps.
-- **Steps**: one logical action per step. Each step shows a render of the 3D model with new parts in color, slightly offset from their final position, and parts already placed in grey. Use numbered callouts, short imperative text, and a tip only where a mistake is likely.
-- **Finish**: a function check (e.g. the motion cycle), and troubleshooting as a short table.
-- Render images from the same verified 3D model (e.g. three.js through headless Chromium, or matplotlib projections). Never draw them by hand.
+Look up the bed size, unusable areas of the bed, the nozzle, and the usual layer heights. If you are not sure, check the specs online, or ask the user if you cannot search. From these, set the design rules for this kit: the smallest wall and feature, the layer height that all dimensions follow, and the clearances for fixed, sliding and rotating fits. Keep these as parameters so they can change after a test print.
 
-## Deliverables
-The sprue STL, the assembly PDF, and a short summary of print settings: layer height, no supports, elephant-foot compensation of about 0.15 mm. Optional extras are an interactive 3D viewer, an assembly animation, and slicing or sending the job to the user's printer if a computer is linked.
+## 3. Choose the concept
 
-## Tooling (suggested)
-Python with shapely for 2D, manifold3d for 3D booleans, slicing, and STL export, matplotlib for maps, and reportlab for the PDF. Keep the generator parametric so fits and dimensions can be changed after the first test print.
+Decide what makes this model worth building: the main idea, the motion or feature it shows, and the level of detail that serves it. Choose how the kit is built so that every part prints flat without supports. Plan how parts join and how the builder tells them apart. Write this down as a short brief and show it to the user before you go further.
+
+## 4. Plan the parts and the build order together
+
+List the parts and the order they go in. For each part, know which face lies on the bed, how it joins its neighbours, and why it is separate. Merge parts when merging loses nothing. Keep parts separate when they move, carry a different colour, or explain something. Details, labels and text go only on faces that stay visible once the model is built.
+
+## 5. Build the 3D model
+
+Build every part and the assembled model in code, driven by the parameters from step 2. Keep the model as the single source for everything that follows, including the checks, the sprue and the guide images.
+
+## 6. Verify by assembling it yourself
+
+Before you make the sprue, build the kit in the model, step by step, in the planned order, as a builder would. For each step, check:
+
+- **The part can get there.** It has a free path from outside to its final place, and nothing already fitted blocks it.
+- **It goes in only one way.** A wrong orientation or a wrong neighbour does not fit.
+- **It stays put.** Nothing falls out or slips when the model is turned over or the next part goes in.
+- **Nothing collides.** No two parts overlap, and every gap is at least the clearance for its fit.
+- **Earlier steps stay possible.** No part gets trapped, and no later part needs one taken out again.
+
+Then test the finished model:
+
+- Run every motion through its full range in small steps. Check moving parts against everything static, including stands, raised text and bosses.
+- Confirm every part prints: it has a flat face for the bed, no overhang that needs support, and no feature below the minimum.
+- Render the model and every step, then look at the images. Check that the idea from step 3 reads clearly and that text is legible at print size.
+
+When a check fails, fix the design and run all the checks again. Do not move on until they all pass. Tell the user what you checked and what you changed.
+
+## 7. Lay out the sprue
+
+Arrange all parts on one frame that fits the bed and avoids its unusable areas. If they truly do not fit, use more sprues and tell the user why. Attach each part with gates that snap off cleanly and leave no mark on a visible face. Number every part on the frame. Check that the result is a single valid printable body, and that every part can be cut free without damage.
+
+## 8. Write the assembly guide
+
+Make a PDF that reads like the manual of a bought kit: clean, visual, with no development notes. Include a cover, the sprue map and parts list, and short "before you start" notes. Then give the steps, each with one action. In each step, show new parts in colour near their place and fitted parts in grey, and add a short instruction. Add a tip only where a mistake is likely. End with a check that the model works and a short troubleshooting table. Every picture comes from the verified model. Follow the build order exactly as you checked it in step 6.
+
+## 9. Check the guide as a builder
+
+Read the guide with only the sprue in hand. Check that every part number in the guide matches the sprue, and that every part is used exactly once. Each step should be clear from its picture and text alone. Fix anything that makes you stop and think.
+
+## 10. Deliver
+
+Give the user the sprue file, the guide, the print settings that matter, and a short summary of the design and the checks it passed. If a test print shows a problem, change the parameters or the design and repeat from the earliest step it affects.

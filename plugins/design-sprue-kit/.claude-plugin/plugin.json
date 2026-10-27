@@ -1,9 +1,11 @@
 {
   "name": "design-sprue-kit",
-  "description": "Design a 3D-printable model kit on a sprue plus a step-by-step assembly PDF, sized for your printer.",
+  "description": "Design a 3D-printable model kit on a sprue (parts snap out of a frame) from a model description and a printer model, with a step-by-step assembly guide. Use when the user wants a printable kit, a snap-together model, or parts on a sprue.",
   "version": "1.0.0",
   "author": {
-    "name": "Vladimir Ivanenko"
+    "name": "Vladimir Ivanenko",
+    "email": "hi@ivanen.co",
+    "url": "https://ivanen.co"
   },
   "license": "MIT",
   "keywords": ["3d-printing", "sprue", "model-kit", "stl", "assembly-instructions"]
