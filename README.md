@@ -33,7 +33,7 @@ The skill is one file in the open [Agent Skills](https://agentskills.io) format:
 ## Examples
 
 - [`examples/four-stroke-engine/`](examples/four-stroke-engine/) contains a single-cylinder engine kit for Bambu Lab P1S. It has the sprue STL, the assembly guide (in Russian), an assembly animation, and photos of a test print.
-- [`examples/big-key-esc/`](examples/big-key-esc/) contains a giant clicky ESC key for Bambu Lab P1S: 7 snap-fit parts with a printed zig-zag spring and a click jacket, no glue or screws. It has the sprue as STL and 3MF, the assembly guide (in English), and photos of a test print.
+- [`examples/big-key-esc/`](examples/big-key-esc/) contains a giant clicky ESC key for Bambu Lab P1S: 7 snap-fit parts with a printed zig-zag spring and a click jacket, no glue or screws. It has the sprue as STL and 3MF, the separate parts as STL, a two-page assembly guide (in English), and photos of a test print of an earlier version.
 
 <p>
   <img src="examples/big-key-esc/printed-model.jpg" alt="Printed Big ESC key kit, assembled" height="300">
